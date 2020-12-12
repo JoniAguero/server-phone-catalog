@@ -16,7 +16,7 @@ jobs:
 
       - run:
           name: Deploying
-          command: eb deploy ${AWS_EB_ENV_NAME}
+          command: eb deploy "${AWS_EB_ENV_NAME}"
 
 workflows:
   version: 2

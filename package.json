@@ -1,0 +1,23 @@
+{
+  "name": "server-phone-catalog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoniAguero/server-phone-catalog.git"
+  },
+  "author": "JoniAguero",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoniAguero/server-phone-catalog/issues"
+  },
+  "homepage": "https://github.com/JoniAguero/server-phone-catalog#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

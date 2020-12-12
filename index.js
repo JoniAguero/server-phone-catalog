@@ -1,10 +1,9 @@
-const express = require('express');
-const app = express();
 
-const PORT = process.env.PORT || 3100;
+const app = require('./app')
+const chalk = require('chalk');
 
-app.use('/', (req, res) => {
-  res.send(`<h1>Hello Elastic Beanstalk</h1>`);
-});
+const port = process.env.PORT || 1234;
 
-app.listen(PORT, () => console.log(`listening on port: ${PORT}`));
+app.listen(port, () => {
+    console.log(`Server Running on port ${chalk.green(`${port}`)}`)
+})

@@ -16,7 +16,7 @@ jobs:
 
       - run:
           name: Deploying
-          command: eb deploy ${AWS_EB_ENV_NAME}
+          command: eb deploy ServerPhoneCatalog-env.eba-afzz6rbc.eu-west-3.elasticbeanstalk.com
 
 workflows:
   version: 2

@@ -3,17 +3,12 @@ const cors = require('cors')
 const logger = require('morgan')
 const express = require('express');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-
+const { dbConnection } = require('./database/config');
 const phonesRoute = require('./routes/phones.route');
-
-const errorHandler = require('./_helpers/error-handler')
-const fatalErrorHandler = require('./_helpers/fatal-error-handler')
 
 require('dotenv').config();
 
-mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI)
+dbConnection();
 
 const app = express();
 app.use(logger('dev'))
@@ -31,11 +26,5 @@ app.use('/', (req, res) => {
     <h1 style >Hello :) , to make sure you use the API, use /api/phones </h1>
   </div>`);
 });
-
-app.use(errorHandler)
-app.use(fatalErrorHandler)
-
-process.on('uncaughtException', fatalErrorHandler)
-process.on('unhandledRejection', fatalErrorHandler)
 
 module.exports = app;

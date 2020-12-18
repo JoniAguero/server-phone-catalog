@@ -28,11 +28,23 @@ const phoneSchema = moongose.Schema({
     screen: {
       type: String
     },
+    cameraFront: {
+      type: String
+    },
+    cameraBack: {
+      type: String
+    },
+    batery: {
+      type: String
+    },
+    storage: {
+      type: String
+    },
     processor: {
       type: String
     },
     ram: {
-      type: Number
+      type: String
     }
 })
 

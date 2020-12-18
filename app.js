@@ -5,6 +5,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { dbConnection } = require('./database/config');
 const phonesRoute = require('./routes/phones.route');
+const authRoute = require('./routes/auth.route');
 
 require('dotenv').config();
 
@@ -18,7 +19,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 
-app.use('/api', [phonesRoute]);
+app.use('/api', [phonesRoute, authRoute]);
+
 
 app.use('/', (req, res) => {
   res.send(`

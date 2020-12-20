@@ -1,9 +1,0 @@
-branch-defaults:
-  master:
-    environment: ${AWS_EB_ENV_NAME}
-global:
-  application_name: server-phone-catalog
-  default_ec2_keyname: elasticbeanstalk:${AWS_EC2_NAME}
-  default_platform: Node.js 12 running on 64bit Amazon Linux 2/5.2.3
-  default_region: eu-west-3
-  sc: git

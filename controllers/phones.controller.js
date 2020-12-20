@@ -20,11 +20,11 @@ const CreatePhone = async (req, res) => {
 }
 
 const DeletePhone = async (req, res = response) => {
-  const phoneId = req.params.id
+
   const uid = req.uid
 
   try {
-    const phone = await Phone.findById(phoneId)
+    const phone = await Phone.findById(req.params.id)
 
     if (!phone) {
       return res.status(404).json({
@@ -40,7 +40,7 @@ const DeletePhone = async (req, res = response) => {
       })
     }
 
-    await Phone.findByIdAndDelete(phoneId)
+    await Phone.findByIdAndDelete(req.params.id)
 
     res.json({ ok: true })
   } catch (error) {
@@ -52,10 +52,11 @@ const DeletePhone = async (req, res = response) => {
 }
 
 const UpdatePhone = async (req, res = response) => {
-  const phoneId = req.params.id
+
   const uid = req.uid
+
   try {
-    const phone = await Phone.findById(phoneId)
+    const phone = await Phone.findById(req.params.id)
 
     if (!phone) {
       return res.status(404).json({
@@ -71,7 +72,7 @@ const UpdatePhone = async (req, res = response) => {
       })
     }
 
-    await Phone.findByIdAndUpdate(phoneId, req.body)
+    await Phone.findByIdAndUpdate(req.params.id, req.body)
 
     res.json({ ok: true })
   } catch (error) {
@@ -84,9 +85,7 @@ const UpdatePhone = async (req, res = response) => {
 
 const UploadImagePhone = async (req, res = response) => {
 
-  const phoneId = req.params.id
   const file = req.files.file
-
   const { mimetype } = await file;
   const extension = mimetype.split("/")[1];
   const imageName = `phones/${uuidv4()}.${extension}`;

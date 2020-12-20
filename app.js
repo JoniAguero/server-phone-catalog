@@ -4,6 +4,7 @@ const logger = require('morgan')
 const express = require('express');
 const bodyParser = require('body-parser');
 const { dbConnection } = require('./database/config');
+const fileUpload = require('express-fileupload');
 const phonesRoute = require('./routes/phones.route');
 const authRoute = require('./routes/auth.route');
 
@@ -12,6 +13,7 @@ require('dotenv').config();
 dbConnection();
 
 const app = express();
+app.use(fileUpload());
 app.use(logger('dev'))
 app.use(cors())
 

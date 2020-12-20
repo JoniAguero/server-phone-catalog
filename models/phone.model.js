@@ -45,6 +45,11 @@ const phoneSchema = moongose.Schema({
     },
     ram: {
       type: String
+    },
+    isModifiable: {
+      type: Boolean,
+      default: true,
+      immutable: true
     }
 })
 

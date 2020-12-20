@@ -1,4 +1,6 @@
 const { Phone } = require("../models/phone.model")
+const awsUploadImage = require("../utils/aws-upload-image");
+const { v4: uuidv4 } = require("uuid");
 
 const CreatePhone = async (req, res) => {
   const phone = new Phone(req.body)
@@ -31,7 +33,7 @@ const DeletePhone = async (req, res = response) => {
       })
     }
 
-    if (!uid) {
+    if (!uid || !phone.isModifiable) {
       return res.status(401).json({
         ok: false,
         msg: "You do not have the privilege to delete data",
@@ -42,7 +44,6 @@ const DeletePhone = async (req, res = response) => {
 
     res.json({ ok: true })
   } catch (error) {
-    console.log(error)
     res.status(500).json({
       ok: false,
       msg: "Please talk to the administrator",
@@ -50,10 +51,65 @@ const DeletePhone = async (req, res = response) => {
   }
 }
 
+const UpdatePhone = async (req, res = response) => {
+  const phoneId = req.params.id
+  const uid = req.uid
+  try {
+    const phone = await Phone.findById(phoneId)
+
+    if (!phone) {
+      return res.status(404).json({
+        ok: false,
+        msg: "Phone does not exist for that id",
+      })
+    }
+
+    if (!uid || !phone.isModifiable) {
+      return res.status(401).json({
+        ok: false,
+        msg: "You do not have the privilege to edit data",
+      })
+    }
+
+    await Phone.findByIdAndUpdate(phoneId, req.body)
+
+    res.json({ ok: true })
+  } catch (error) {
+    res.status(500).json({
+      ok: false,
+      msg: "Please talk to the administrator",
+    })
+  }
+}
+
+const UploadImagePhone = async (req, res = response) => {
+
+  const phoneId = req.params.id
+  const file = req.files.file
+
+  const { mimetype } = await file;
+  const extension = mimetype.split("/")[1];
+  const imageName = `phones/${uuidv4()}.${extension}`;
+  const fileData = file.data;
+
+  try {
+    const result = await awsUploadImage(fileData, imageName);
+    res.status(200).send({
+      ok: true,
+      urlImage: result
+    });
+  } catch (error) {
+    res.status(500).json({
+      ok: false,
+      msg: error,
+    })
+  }
+}
+
 const GetPhones = (req, res) => {
-  Phone.find({}, (err, Phones) => {
+  Phone.find({}, (err, phones) => {
     if (err) return res.status(400).send(err)
-    res.status(200).send(Phones)
+    res.status(200).send(phones)
   })
 }
 
@@ -67,6 +123,8 @@ const GetPhoneById = (req, res) => {
 module.exports = {
   CreatePhone,
   DeletePhone,
+  UpdatePhone,
+  UploadImagePhone,
   GetPhones,
   GetPhoneById,
 }

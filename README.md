@@ -7,7 +7,7 @@ Images are uploaded to an AWS S3 Bucket. [JWT](https://jwt.io/) is used to manag
 
 CI/CD: [CircleCi](https://circleci.com/) & [Heroku](https://www.heroku.com/what)
 
-APP Preview: [APP hosted by Netfily](https://client-phone-catalog.netlify.app/)
+APP Preview: [APP hosted by Netfily](https://client-phone-catalog.netlify.app/)  
 API Preview: [API hosted by Heroku](https://api-phone-catalog.herokuapp.com/)
 ## Installation
 

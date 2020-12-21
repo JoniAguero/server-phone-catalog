@@ -17,34 +17,43 @@ const phoneSchema = moongose.Schema({
     },
     color: {
       type: String,
+      require: true,
     },
     price: {
       type: Number,
-      default: 0
+      default: 0,
+      require: true,
     },
     imageFileName: {
-      type: String
+      type: String,
     },
     screen: {
-      type: String
+      type: String,
+      require: true,
     },
     cameraFront: {
-      type: String
+      type: String,
+      require: true,
     },
     cameraBack: {
-      type: String
+      type: String,
+      require: true,
     },
     batery: {
-      type: String
+      type: String,
+      require: true,
     },
     storage: {
-      type: String
+      type: String,
+      require: true,
     },
     processor: {
-      type: String
+      type: String,
+      require: true,
     },
     ram: {
-      type: String
+      type: String,
+      require: true,
     },
     isModifiable: {
       type: Boolean,
